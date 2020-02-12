@@ -1,4 +1,4 @@
-.PHONY: all clean test help
+.PHONY: all clean test help container-image
 
 define NL
 
@@ -7,6 +7,8 @@ endef
 
 VERSION := $(shell cat VERSION)
 OUTPUT  := makeself-$(VERSION).run
+VCS_REF := $(strip $(shell git rev-parse --short HEAD))
+BUILD_DATE := $(shell date -u +'%Y-%m-%dT%H:%M:%SZ')
 
 all: $(OUTPUT)
 
@@ -28,4 +30,11 @@ test:
 		fi$(NL))
 
 help:
-	$(info Targets: all $(OUTPUT) clean test help)
+	$(info Targets: all $(OUTPUT) clean test help container-image)
+
+container-image:
+	docker image build \
+		--build-arg VCS_REF=$(VCS_REF) \
+		--build-arg VERSION=$(VERSION) \
+		--build-arg BUILD_DATE=$(BUILD_DATE) \
+		-t rothwerx/makeself:$(VERSION) .
