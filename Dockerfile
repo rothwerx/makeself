@@ -19,5 +19,5 @@ RUN apk --update add tar xz pigz
 
 COPY . .
 
-ENTRYPOINT ["./makeself.sh"]
+ENTRYPOINT ["/tmp/makeself.sh"]
 CMD ["--help"]

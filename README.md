@@ -1,6 +1,17 @@
 [![License: GPL v2](https://img.shields.io/badge/License-GPL%20v2-blue.svg)](https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html)
 [![Build Status](https://travis-ci.org/megastep/makeself.svg?branch=master)](https://travis-ci.org/megastep/makeself)
 
+# Using the docker version
+
+Below is the README as you'd find it in the original repo found here: https://github.com/megastep/makeself
+
+The entrypoint for the container is makeself itself, so you only need to pass the arguments.
+Here's an example of running it in the current directory of the Docker host, where
+'artifact' is the archive_dir within that directory. This will produce 'installer.run'
+in the current directory of the Docker host when it completes.
+`docker run --rm -v $(pwd):/build -w /build rothwerx/makeself:latest --pigz artifact installer.run "My Installer" ./installer.sh`
+
+
 # makeself - Make self-extractable archives on Unix
 
 [makeself.sh][1] is a small shell script that generates a self-extractable
